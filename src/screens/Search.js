@@ -1,7 +1,16 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { StyleSheet, TextInput, View, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  TextInput,
+  View,
+  ScrollView,
+  FlatList,
+  ActivityIndicator,
+} from "react-native";
 import { AntDesign, Ionicons, MaterialIcons } from "@expo/vector-icons";
+
+import env from "../../env.json";
 
 import MiniCard from "../components/MiniCard";
 
@@ -9,6 +18,20 @@ export default function SearchScreen() {
   const myColor = "#212121";
 
   const [value, setValue] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [miniCardData, setMiniCardData] = useState([]);
+
+  const fetchData = () => {
+    setLoading(true);
+    fetch(
+      `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${value}&type=video&key=${env.API_KEY}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setMiniCardData(data.items);
+        setLoading(false);
+      });
+  };
 
   return (
     <View style={{ flex: 1 }}>
@@ -30,9 +53,34 @@ export default function SearchScreen() {
             return setValue(value);
           }}
         />
-        <Ionicons name="md-send" size={32} color={myColor} />
+        <Ionicons
+          onPress={() => {
+            return fetchData();
+          }}
+          name="md-send"
+          size={32}
+          color={myColor}
+        />
       </View>
-      <ScrollView>
+      {loading ? (
+        <ActivityIndicator style={{ marginTop: 10 }} size="large" color="red" />
+      ) : (
+        <FlatList
+          data={miniCardData}
+          keyExtractor={(item) => item.id.videoId}
+          renderItem={({ item }) => {
+            return (
+              <MiniCard
+                videoId={item.id.videoId}
+                title={item.snippet.title}
+                channel={item.snippet.channelTitle}
+              />
+            );
+          }}
+        />
+      )}
+
+      {/* <ScrollView>
         <MiniCard></MiniCard>
         <MiniCard></MiniCard>
         <MiniCard></MiniCard>
@@ -41,7 +89,7 @@ export default function SearchScreen() {
         <MiniCard></MiniCard>
         <MiniCard></MiniCard>
         <MiniCard></MiniCard>
-      </ScrollView>
+      </ScrollView> */}
     </View>
   );
 }
