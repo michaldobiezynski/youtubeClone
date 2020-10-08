@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { StyleSheet, TextInput, View, ScrollView } from "react-native";
 import { AntDesign, Ionicons, MaterialIcons } from "@expo/vector-icons";
 
-import Card from "../components/Card";
+import MiniCard from "../components/MiniCard";
 
 export default function SearchScreen() {
   const myColor = "#212121";
@@ -32,6 +32,16 @@ export default function SearchScreen() {
         />
         <Ionicons name="md-send" size={32} color={myColor} />
       </View>
+      <ScrollView>
+        <MiniCard></MiniCard>
+        <MiniCard></MiniCard>
+        <MiniCard></MiniCard>
+        <MiniCard></MiniCard>
+        <MiniCard></MiniCard>
+        <MiniCard></MiniCard>
+        <MiniCard></MiniCard>
+        <MiniCard></MiniCard>
+      </ScrollView>
     </View>
   );
 }
