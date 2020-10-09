@@ -9,9 +9,8 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { AntDesign, Ionicons, MaterialIcons } from "@expo/vector-icons";
-
+import Constant from "expo-constants";
 import env from "../../env.json";
-
 import MiniCard from "../components/MiniCard";
 
 export default function SearchScreen() {
@@ -37,6 +36,8 @@ export default function SearchScreen() {
     <View style={{ flex: 1 }}>
       <View
         style={{
+          marginTop: Constant.statusBarHeight,
+
           padding: 5,
           flexDirection: "row",
           justifyContent: "space-around",
