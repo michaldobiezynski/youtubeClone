@@ -10,7 +10,7 @@ function MiniCard(props) {
     <View style={{ flexDirection: "row", margin: 10, marginBottom: 0 }}>
       <Image
         source={{
-          uri: `https://i.ytimg.com/v1/${props.videoId}/default.jpg`,
+          uri: `https://i.ytimg.com/vi/${props.videoId}/hqdefault.jpg`,
         }}
         style={{ width: "45%", height: 100 }}></Image>
       <View style={{ paddingLeft: 7 }}>
