@@ -7,7 +7,8 @@ import Card from "../components/Card";
 
 export default function Explore() {
   return (
-    <View style={{ flex: 1, marginTop: Constant.statusBarHeight }}>
+    <View style={{ flex: 1 }}>
+      <Header />
       <Text>Explore</Text>
     </View>
   );

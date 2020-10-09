@@ -12,8 +12,11 @@ import { AntDesign, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import Constant from "expo-constants";
 import env from "../../env.json";
 import MiniCard from "../components/MiniCard";
+import { useNavigation } from "@react-navigation/native";
 
 export default function SearchScreen() {
+  const navigation = useNavigation();
+
   const myColor = "#212121";
 
   const [value, setValue] = useState("");
@@ -47,7 +50,14 @@ export default function SearchScreen() {
           shadowOpacity: 0.2,
           backgroundColor: "white",
         }}>
-        <Ionicons name="md-arrow-back" size={32} color={myColor} />
+        <Ionicons
+          name="md-arrow-back"
+          size={32}
+          color={myColor}
+          onPress={() => {
+            return navigation.goBack();
+          }}
+        />
         <TextInput
           style={{ width: "70%", backgroundColor: "#e6e6e6" }}
           onChangeText={(text) => {
