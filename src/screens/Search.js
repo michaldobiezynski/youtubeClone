@@ -13,6 +13,7 @@ import Constant from "expo-constants";
 import env from "../../env.json";
 import MiniCard from "../components/MiniCard";
 import { useNavigation } from "@react-navigation/native";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function SearchScreen() {
   const navigation = useNavigation();
@@ -21,7 +22,11 @@ export default function SearchScreen() {
 
   const [value, setValue] = useState("");
   const [loading, setLoading] = useState(false);
-  const [miniCardData, setMiniCardData] = useState([]);
+  // const [miniCardData, setMiniCardData] = useState([]);
+  const miniCardData = useSelector((state) => {
+    return state;
+  });
+  const dispatch = useDispatch();
 
   const fetchData = () => {
     setLoading(true);
@@ -30,7 +35,8 @@ export default function SearchScreen() {
     )
       .then((res) => res.json())
       .then((data) => {
-        setMiniCardData(data.items);
+        // setMiniCardData(data.items);
+        dispatch({ type: "add", payload: data.items });
         setLoading(false);
       });
   };

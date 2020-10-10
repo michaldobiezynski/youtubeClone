@@ -5,12 +5,17 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AntDesign, Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
 
 import Home from "./src/screens/Home";
 import Search from "./src/screens/Search";
 import Subscribe from "./src/screens/Subscribe";
 import VideoPlayer from "./src/screens/VideoPlayer";
 import Explore from "./src/screens/Explore";
+import { reducer } from "./src/reducers/reducer";
+
+const store = createStore(reducer);
 
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
@@ -46,13 +51,15 @@ const RootHome = () => {
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator headerMode>
-        <Stack.Screen name="rootHome" component={RootHome}></Stack.Screen>
-        <Stack.Screen name="search" component={Search}></Stack.Screen>
-        <Stack.Screen name="video" component={VideoPlayer}></Stack.Screen>
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator headerMode>
+          <Stack.Screen name="rootHome" component={RootHome}></Stack.Screen>
+          <Stack.Screen name="search" component={Search}></Stack.Screen>
+          <Stack.Screen name="video" component={VideoPlayer}></Stack.Screen>
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 
