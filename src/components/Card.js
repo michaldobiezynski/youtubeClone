@@ -3,15 +3,14 @@ import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import Constant from "expo-constants";
 
-function Card() {
+function Card(props) {
   const myColor = "#212121";
 
   return (
     <View style={{ marginBottom: 10 }}>
       <Image
         source={{
-          uri:
-            "https://images.unsplash.com/photo-1487088678257-3a541e6e3922?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1567&q=80",
+          uri: `https://i.ytimg.com/vi/${props.videoId}/hqdefault.jpg`,
         }}
         style={{ width: "100%", height: 200 }}></Image>
       <View style={{ flexDirection: "row", margin: 5 }}>
@@ -25,9 +24,9 @@ function Card() {
               fontSize: 20,
               width: Dimensions.get("screen").width - 50,
             }}>
-            This is amazing card test estscdadasdfadfgsdsadasdasadsads
+            {props.title}
           </Text>
-          <Text>This is amazing card</Text>
+          <Text>{props.channel}</Text>
           <Text></Text>
         </View>
       </View>
