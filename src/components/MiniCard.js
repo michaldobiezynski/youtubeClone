@@ -9,10 +9,15 @@ import {
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import Constant from "expo-constants";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 
 function MiniCard(props) {
   const navigation = useNavigation();
+
+  const { colors } = useTheme();
+
+  const textColor = colors.iconColor;
+
   const myColor = "#212121";
 
   return (
@@ -32,12 +37,18 @@ function MiniCard(props) {
           style={{ width: "45%", height: 100 }}></Image>
         <View style={{ paddingLeft: 7 }}>
           <Text
-            style={{ fontSize: 17, width: Dimensions.get("screen").width / 2 }}
+            style={{
+              fontSize: 17,
+              width: Dimensions.get("screen").width / 2,
+              color: textColor,
+            }}
             ellipsizeMode="tail"
             numberOfLines={3}>
             {props.title}
           </Text>
-          <Text style={{ fontSize: 12 }}>{props.channel}</Text>
+          <Text style={{ fontSize: 12, color: textColor }}>
+            {props.channel}
+          </Text>
         </View>
       </View>
     </TouchableOpacity>

@@ -1,7 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
+import {
+  NavigationContainer,
+  DefaultTheme,
+  DarkTheme,
+  useTheme,
+} from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AntDesign, Ionicons, MaterialIcons } from "@expo/vector-icons";
@@ -15,12 +20,33 @@ import VideoPlayer from "./src/screens/VideoPlayer";
 import Explore from "./src/screens/Explore";
 import { reducer } from "./src/reducers/reducer";
 
+const customDarkTheme = {
+  ...DarkTheme,
+  colors: {
+    ...DarkTheme.colors,
+    headerColor: "#404040",
+    iconColor: "white",
+    tabIcon: "white",
+  },
+};
+const customDefaultTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    headerColor: "white",
+    iconColor: "black",
+    tabIcon: "red",
+  },
+};
+
 const store = createStore(reducer);
 
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
 
 const RootHome = () => {
+  const { colors } = useTheme();
+
   return (
     <Tabs.Navigator
       screenOptions={({ route }) => ({
@@ -39,7 +65,7 @@ const RootHome = () => {
         },
       })}
       tabBarOptions={{
-        activeTintColor: "red",
+        activeTintColor: colors.tabIcon,
         inactiveTintColor: "gray",
       }}>
       <Tabs.Screen name="home" component={Home}></Tabs.Screen>
@@ -52,7 +78,7 @@ const RootHome = () => {
 export default function App() {
   return (
     <Provider store={store}>
-      <NavigationContainer>
+      <NavigationContainer theme={customDefaultTheme}>
         <Stack.Navigator headerMode>
           <Stack.Screen name="rootHome" component={RootHome}></Stack.Screen>
           <Stack.Screen name="search" component={Search}></Stack.Screen>

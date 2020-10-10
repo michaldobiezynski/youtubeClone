@@ -12,13 +12,13 @@ import { AntDesign, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import Constant from "expo-constants";
 import env from "../../env.json";
 import MiniCard from "../components/MiniCard";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import { useSelector, useDispatch } from "react-redux";
 
 export default function SearchScreen() {
   const navigation = useNavigation();
-
-  const myColor = "#212121";
+  const { colors } = useTheme();
+  const myColor = colors.iconColor;
 
   const [value, setValue] = useState("");
   const [loading, setLoading] = useState(false);
@@ -54,9 +54,10 @@ export default function SearchScreen() {
           shadowOffset: { width: 1, height: 1 },
           shadowColor: "black",
           shadowOpacity: 0.2,
-          backgroundColor: "white",
+          backgroundColor: colors.headerColor,
         }}>
         <Ionicons
+          color={myColor}
           name="md-arrow-back"
           size={32}
           color={myColor}

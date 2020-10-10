@@ -9,10 +9,13 @@ import {
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import Constant from "expo-constants";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 
 function Card(props) {
   const navigation = useNavigation();
+  const { colors } = useTheme();
+
+  const textColor = colors.iconColor;
 
   const myColor = "#212121";
 
@@ -41,10 +44,11 @@ function Card(props) {
               style={{
                 fontSize: 20,
                 width: Dimensions.get("screen").width - 50,
+                color: textColor,
               }}>
               {props.title}
             </Text>
-            <Text>{props.channel}</Text>
+            <Text style={{ color: textColor }}>{props.channel}</Text>
             <Text></Text>
           </View>
         </View>
