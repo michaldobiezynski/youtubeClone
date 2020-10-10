@@ -10,8 +10,8 @@ import {
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AntDesign, Ionicons, MaterialIcons } from "@expo/vector-icons";
-import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { Provider, useSelector } from "react-redux";
+import { createStore, combineReducers } from "redux";
 
 import Home from "./src/screens/Home";
 import Search from "./src/screens/Search";
@@ -19,6 +19,7 @@ import Subscribe from "./src/screens/Subscribe";
 import VideoPlayer from "./src/screens/VideoPlayer";
 import Explore from "./src/screens/Explore";
 import { reducer } from "./src/reducers/reducer";
+import { themeReducer } from "./src/reducers/themeReducer";
 
 const customDarkTheme = {
   ...DarkTheme,
@@ -39,7 +40,11 @@ const customDefaultTheme = {
   },
 };
 
-const store = createStore(reducer);
+const rootReducer = combineReducers({
+  cardData: reducer,
+  darkMode: themeReducer,
+});
+const store = createStore(rootReducer);
 
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
@@ -75,10 +80,21 @@ const RootHome = () => {
   );
 };
 
-export default function App() {
+export default () => {
   return (
     <Provider store={store}>
-      <NavigationContainer theme={customDefaultTheme}>
+      <Navigation></Navigation>
+    </Provider>
+  );
+};
+export function Navigation() {
+  let currentTheme = useSelector((state) => {
+    return state.darkMode;
+  });
+  return (
+    <Provider store={store}>
+      <NavigationContainer
+        theme={currentTheme ? customDarkTheme : customDefaultTheme}>
         <Stack.Navigator headerMode>
           <Stack.Screen name="rootHome" component={RootHome}></Stack.Screen>
           <Stack.Screen name="search" component={Search}></Stack.Screen>

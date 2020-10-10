@@ -16,7 +16,7 @@ import Card from "../components/Card";
 
 export default function HomeScreen({ navigation }) {
   const cardData = useSelector((state) => {
-    return state;
+    return state.cardData;
   });
   return (
     <View style={{ flex: 1 }}>

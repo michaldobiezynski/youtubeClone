@@ -4,9 +4,12 @@ import { StyleSheet, Text, View } from "react-native";
 import { AntDesign, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import Constant from "expo-constants";
 import { useNavigation, useTheme } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Header() {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const currentMode = useSelector((state) => state.darkMode);
   const { colors } = useTheme();
   const myColor = colors.iconColor;
   return (
@@ -61,7 +64,14 @@ export default function Header() {
             return navigation.navigate("search");
           }}
         />
-        <MaterialIcons name="account-circle" size={32} color={myColor} />
+        <MaterialIcons
+          onPress={() => {
+            dispatch({ type: "changeTheme", payload: !currentMode });
+          }}
+          name="account-circle"
+          size={32}
+          color={myColor}
+        />
       </View>
     </View>
   );

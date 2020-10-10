@@ -24,7 +24,7 @@ export default function SearchScreen() {
   const [loading, setLoading] = useState(false);
   // const [miniCardData, setMiniCardData] = useState([]);
   const miniCardData = useSelector((state) => {
-    return state;
+    return state.cardData;
   });
   const dispatch = useDispatch();
 
