@@ -28,8 +28,14 @@ export default function Header() {
           name="youtube"
           size={28}
           color="red"
+          onPress={() => {
+            return navigation.navigate("home");
+          }}
         />
         <Text
+          onPress={() => {
+            return navigation.navigate("home");
+          }}
           style={{
             fontSize: 22,
             marginLeft: 5,
