@@ -92,16 +92,14 @@ export function Navigation() {
     return state.darkMode;
   });
   return (
-    <Provider store={store}>
-      <NavigationContainer
-        theme={currentTheme ? customDarkTheme : customDefaultTheme}>
-        <Stack.Navigator headerMode>
-          <Stack.Screen name="rootHome" component={RootHome}></Stack.Screen>
-          <Stack.Screen name="search" component={Search}></Stack.Screen>
-          <Stack.Screen name="video" component={VideoPlayer}></Stack.Screen>
-        </Stack.Navigator>
-      </NavigationContainer>
-    </Provider>
+    <NavigationContainer
+      theme={currentTheme ? customDarkTheme : customDefaultTheme}>
+      <Stack.Navigator headerMode>
+        <Stack.Screen name="rootHome" component={RootHome}></Stack.Screen>
+        <Stack.Screen name="search" component={Search}></Stack.Screen>
+        <Stack.Screen name="video" component={VideoPlayer}></Stack.Screen>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
